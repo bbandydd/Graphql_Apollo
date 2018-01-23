@@ -2,11 +2,21 @@ import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import resolvers from './resolver';
 
 const typeDefs = `
+    input BookInput {
+        id: String
+        name: String
+    }
+
+    type Book {
+        id: String
+        name: String
+    }
+
     type Author {
         id: String
         age: Int
         name: String
-        books: [String]
+        books: [Book]
     }
 
     type Query {
@@ -15,7 +25,7 @@ const typeDefs = `
     }
 
     type Mutation {
-        addAuthor(name: String!, age: Int!, books: [String]!): Author
+        addAuthor(name: String!, age: Int!, books: [BookInput]!): Author
         deleteAuthor(id: String!): Author
         updateAuthor(id: String!, name: String!): Author
     }

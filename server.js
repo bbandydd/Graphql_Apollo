@@ -16,10 +16,12 @@ connection.once('open', () => {
     console.log('connection to database was successful');
 });
 
+const userCheck = (req, res) => req.header('token') === "123" ? req.next() : res.send(401);
+
+// server.use(userCheck);
 server.use('/graphiql', graphiqlExpress({
     endpointURL: "/graphql"
 }));
-
 server.use('/graphql', bodyParser.json(), graphqlExpress({
     schema
 }));

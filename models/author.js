@@ -7,7 +7,10 @@ const autorSchema = new schema({
     id: {type: String, default: uuid.v1},
     name: String,
     age: Number,
-    books: [String],
+    books: [{
+        id: String,
+        name: String
+    }],
 });
 
 const model = mongoose.model('author', autorSchema);
